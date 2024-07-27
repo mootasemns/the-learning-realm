@@ -1,0 +1,31 @@
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  padding-top: 100px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  position: fixed; /* This ensures the sidebar stays fixed */
+  top: 0; /* Ensures the sidebar is fixed from the top */
+  left: 0; /* Ensures the sidebar is fixed from the left */
+  overflow-y: auto; /* Allows scrolling if content exceeds sidebar height */
+  top: 80px;
+}
+
+.sidebar a {
+  display: block;
+  color: #333;
+  font-size: 1.2em;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar a:hover {
+  background-color: #ddd;
+}
+
+.content {
+  margin-left: 220px; /* Adjusted to account for the width of the sidebar */
+  padding: 20px;
+}

@@ -1,0 +1,101 @@
+.learning-hub-container {
+   font-family: Arial, sans-serif;
+   padding: 20px;
+   max-width: 100%;
+   margin: 0 auto;
+   height: auto;
+   padding-bottom: 90px;
+   background-color: #f9f9f9; /* New background color */
+}
+
+.about-us-header {
+   text-align: center;
+   margin-bottom: 40px;
+}
+
+.about-us-header h1 {
+   font-size: 2.5em;
+   color: #333;
+}
+
+.about-us-header p {
+   font-size: 1.2em;
+   color: #777;
+}
+
+.search {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 20px;
+}
+
+.search input {
+   width: 35%;
+   padding: 6px;
+   border: 1px solid #ccc;
+   font-size: 17px;
+   margin-right: 10px;
+}
+
+.search select {
+   font-size: 17px;
+   padding: 6px;
+   margin-right: 10px;
+}
+
+.search button {
+   height: 40px;
+   padding: 0 20px;
+   color: #fff;
+   text-transform: uppercase;
+   font-size: 14px;
+   letter-spacing: 1px;
+   border-radius: 20px;
+   background: linear-gradient(190deg, black, #777);
+   border: none;
+   cursor: pointer;
+}
+
+.card-container {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 25px;
+   margin-top: 50px;
+   padding: 20px;
+   background-color: #fff; /* New background color */
+   border-radius: 10px; /* Add rounded corners */
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+   max-height: 400px; /* Fixed height */
+   overflow-y: auto; /* Scrollbar */
+}
+
+.card {
+   width: 250px;
+   height: 200px;
+   background-color: #f0f0f0;
+   border-radius: 10px;
+   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+   cursor: pointer;
+   transition: transform 0.2s; /* Add transition for hover effect */
+}
+
+.card:hover {
+   transform: translateY(-5px); /* Lift the card on hover */
+}
+
+.card-content {
+   padding: 20px; /* Adjust padding */
+   line-height: 1.5; /* Increase line height */
+}
+
+.card-content h1 {
+   font-size: 24px; /* Adjust font size */
+   margin-bottom: 10px;
+   color: #333; /* Adjust color */
+}
+
+.card-content p {
+   font-size: 16px; /* Adjust font size */
+   color: #555; /* Adjust color */
+}
