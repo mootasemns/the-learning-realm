@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import '../../styles/pages/Quiz.css'
+import '../../styles/pages/Quiz.css';
 
 const Quiz = ({ data }) => {
-
-  console.log("data : " ,data )
-  console.log("data[0] : " ,data[0] )
+  const Token = window.localStorage.getItem("token");
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -48,35 +46,54 @@ const Quiz = ({ data }) => {
   };
 
   const handleFinish = () => {
-    // Reset quiz state
-    setIndex(0);
-    setScore(0);
-    setSelectedAnswer(null);
-    setFinished(false);
-    setAnsweredQuestions([]);
+    window.location.reload();
   };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      setMessage("Quiz URL copied to clipboard");
-      setTimeout(() => setMessage(""), 2000);
-    });
+
+  const handleBookmarkMCQ = async () => {
+    if (Token) {
+      try {
+        const response = await fetch(
+          "https://gp-server-vxwf.onrender.com/api/saved/quizzes",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              token: Token,
+              quizzes: [data],
+            }),
+          }
+        );
+        const result = await response.json();
+        console.log("result : ", result);
+        if (response.ok) {
+          if (result.success) {
+            alert("MCQ bookmarked successfully!");
+          } else {
+            alert("Failed to bookmark quiz.");
+          }
+        } else {
+          alert("Failed to bookmark quiz.");
+        }
+      } catch (error) {
+        console.error("Error bookmarking quiz:", error);
+        alert("Error bookmarking quiz. Please try again.");
+      }
+    } else {
+      alert("No token found. Please log in.");
+    }
   };
 
   const renderFinishPage = () => {
     return (
       <div className="quizpagebody">
         <div className="container">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+          <div className="header">
             <h1>{reviewMode ? "Quiz Review" : "Quiz Finished"}</h1>
-            <span style={{ cursor: "pointer" }} onClick={copyToClipboard}>
-              Share Icon
+            <span className="share-icon" onClick={handleBookmarkMCQ}>
+              Share
             </span>
           </div>
           <hr />
@@ -86,9 +103,9 @@ const Quiz = ({ data }) => {
             </h2>
           )}
           {!reviewMode ? (
-            <div style={{ textAlign: "center", marginTop: "20px" }}>
-              <button onClick={handleReview}>Review</button>
-              <button style={{ marginLeft: "20px" }}>Finish</button>
+            <div style={{ textAlign: "center", marginTop: "20px", display: "flex", justifyContent: "center" }}>
+              <button onClick={handleReview} style={{ marginRight: "20px" }}>Review</button>
+              <button onClick={handleFinish}>Finish</button>
             </div>
           ) : (
             <div className="finished-questions">
@@ -136,7 +153,12 @@ const Quiz = ({ data }) => {
   return (
     <div className="quizpagebody">
       <div className="container">
-        <h1>Quiz App</h1>
+        <div className="header">
+          <h1>Quiz App</h1>
+          <span className="share-text" onClick={handleBookmarkMCQ}>
+            Share
+          </span>
+        </div>
         <hr />
         <h2>
           {index + 1}. {currentQuestion.question}

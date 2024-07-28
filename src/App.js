@@ -13,6 +13,7 @@ import LearningHub from "./components/pages/LearningHub.js";
 function App() {
   return (
     <>
+      <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/AI_Services" element={<AI_Services />} />

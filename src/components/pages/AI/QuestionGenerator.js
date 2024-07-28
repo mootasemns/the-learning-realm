@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import '../../../styles/pages/QuestionGenerator.css';
+// import '../../../styles/pages/QuestionGenerator.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark, faShare } from '@fortawesome/free-solid-svg-icons';
+import '../../../styles/pages/Merged.css';
 
 function QuestionsGenerator() {
     const Token = window.localStorage.getItem("token");
 
     const [inputText, setInputText] = useState("");
     const [messages, setMessages] = useState([]);
+    const [fullQuestions, setFullQuestions] = useState([]); // State to store full question-answer pairs
 
     const handleSendMessage = async () => {
         if (inputText.trim() !== "") {
@@ -15,25 +17,30 @@ function QuestionsGenerator() {
             setMessages(newMessages);
 
             try {
-                const response = await fetch("https://9659-91-186-247-233.ngrok-free.app/generate_questions/", {
+                const response = await fetch("https://5bf2-109-107-226-136.ngrok-free.app/generate_questions/", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({ text: inputText }),
                 });
+                const data = await response.json();
+                console.log("data : ", data)
 
                 if (response.ok) {
-                    const data = await response.json();
-                    console.log("data : " , data)
-                    const questions = Object.values(data).map(item => item.question); // Extract questions from the response
-
-                    const summaryMessages = questions.map((question, index) => ({
-                        text: question,
-                        type: "ai-text"
+                    const questions = Object.values(data).map(item => ({
+                        question: item.question,
+                        answer: item.answer
                     }));
 
-                    setMessages([...newMessages, ...summaryMessages]);
+                    const questionMessages = questions.map((item, index) => ({
+                        text: item.question,
+                        type: "ai-text",
+                        id: index
+                    }));
+
+                    setMessages([...newMessages, ...questionMessages]);
+                    setFullQuestions([...fullQuestions, ...questions]); // Store full question-answer pairs
                 } else {
                     setMessages([
                         ...newMessages,
@@ -60,6 +67,7 @@ function QuestionsGenerator() {
 
     const handleClearMessages = () => {
         setMessages([]);
+        setFullQuestions([]); // Clear full question-answer pairs
     };
 
     const handleShareText = (text) => {
@@ -67,10 +75,43 @@ function QuestionsGenerator() {
             .then(() => alert("Text copied to clipboard!"))
             .catch((error) => console.error("Error copying text:", error));
     };
-
-    const handleBookmarkText = (text) => {
-        // Implement your bookmark logic here
-        alert("Bookmark functionality is not implemented yet.");
+        
+    const handleBookmarkQuestions = async (index) => {
+        if (Token) {
+            console.log("Token : ", Token);
+            try {
+                const response = await fetch(
+                    "https://gp-server-vxwf.onrender.com/api/saved/questions",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            token: Token,
+                            questions: [fullQuestions[index]],
+                        }),
+                    }
+                );
+                
+                const result = await response.json();
+                console.log("result : ", result);
+                if (response.ok) {
+                    if (result.success) {
+                        alert("Question bookmarked successfully!");
+                    } else {
+                        alert("Failed to bookmark question.");
+                    }
+                } else {
+                    alert("Failed to bookmark question.");
+                }
+            } catch (error) {
+                console.error("Error bookmarking question:", error);
+                alert("Error bookmarking question. Please try again.");
+            }
+        } else {
+            alert("No token found. Please log in.");
+        }
     };
 
     return (
@@ -88,7 +129,7 @@ function QuestionsGenerator() {
                                         <div className="text-share-icon" onClick={() => handleShareText(msg.text)}>
                                             <FontAwesomeIcon icon={faShare} />
                                         </div>
-                                        <div className="text-bookmark-icon" onClick={() => handleBookmarkText(msg.text)}>
+                                        <div className="text-bookmark-icon" onClick={() => handleBookmarkQuestions(msg.id)}>
                                             <FontAwesomeIcon icon={faBookmark} />
                                         </div>
                                     </div>

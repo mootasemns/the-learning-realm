@@ -1,15 +1,17 @@
 .sidebar {
-  width: 200px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  width: 240px;
   background-color: #f4f4f4;
-  padding: 20px;
   padding-top: 100px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   height: 100vh;
-  position: fixed; /* This ensures the sidebar stays fixed */
-  top: 0; /* Ensures the sidebar is fixed from the top */
-  left: 0; /* Ensures the sidebar is fixed from the left */
-  overflow-y: auto; /* Allows scrolling if content exceeds sidebar height */
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
   top: 80px;
+  border: 1px solid yellow;
 }
 
 .sidebar a {
@@ -26,6 +28,6 @@
 }
 
 .content {
-  margin-left: 220px; /* Adjusted to account for the width of the sidebar */
+  margin-left: 220px;
   padding: 20px;
 }

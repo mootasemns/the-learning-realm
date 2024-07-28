@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import '../../../styles/pages/MCQGenerator.css';
+// import '../../../styles/pages/MCQGenerator.css';
 import Quiz from "../Quiz.jsx";
+import '../../../styles/pages/Merged.css';
 
 
 function MCQQuizGenerator() {
@@ -23,17 +24,18 @@ function MCQQuizGenerator() {
       }
       try {
         const response = await fetch(
-          "https://9659-91-186-247-233.ngrok-free.app/generate_mcq",
+          "https://5bf2-109-107-226-136.ngrok-free.app/generate_mcq",
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ context: "Data", method: "Wordnet" }),
+            body: JSON.stringify({ context: inputText, method: "Wordnet" }),
           }
         );
         const data = await response.json();
-        setQuizData(data);
+        console.log("data : " , data)
+        setQuizData(data);  
   
         if (!response.ok) {
           throw new Error("Failed to generate quiz");
@@ -47,59 +49,21 @@ function MCQQuizGenerator() {
         setLoading(false);
       }
     };
-if (loading) {
-  return <p>Loading..</p>;
-}
-if (error) {
-  return <p>Error</p>;
-}
-if (quizData) {
-  return <Quiz data={quizData} />;
-}
 
+  if (error) {
+      console.log("error : " , error )
+  }
+
+  if (quizData && quizData.length > 0) {
+    return <Quiz data={quizData} />;
+  }
+  
   const handleKeyDown = (event) => {
       if (event.key === "Enter") {
           handleSendMessage();
       }
   };
 
-
-  const handleBookmarkMCQ = async (text) => {
-    if (Token) {
-      console.log("Token : ", Token);
-      try {
-        const response = await fetch(
-          "https://gp-server-vxwf.onrender.com/api/saved/quizzes",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              token: Token,
-              quizzes: [text],
-            }),
-          }
-        );
-        const result = await response.json();
-        console.log("result : ", result);
-        if (response.ok) {
-          if (result.success) {
-            alert("MCQ bookmarked successfully!");
-          } else {
-            alert("Failed to bookmark quiz.");
-          }
-        } else {
-          alert("Failed to bookmark quiz.");
-        }
-      } catch (error) {
-        console.error("Error bookmarking quiz:", error);
-        alert("Error bookmarking quiz. Please try again.");
-      }
-    } else {
-      alert("No token found. Please log in.");
-    }
-  };
 
   return (
       <div className="page-container">

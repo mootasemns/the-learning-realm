@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import "../../../styles/pages/TextToSpeech.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark, faDownload, faShare } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,7 +17,7 @@ function TextToSpeech() {
 
       try {
         const response = await fetch(
-          "https://9659-91-186-247-233.ngrok-free.app/TextToSpeech/",
+          "https://5bf2-109-107-226-136.ngrok-free.app/TextToSpeech/",
           {
             method: "POST",
             headers: {

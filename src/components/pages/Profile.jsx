@@ -117,7 +117,7 @@ const Profile = () => {
             <div className="grid-container">
               {questions.map((question, index) => (
                 <div className="grid-item" key={question._id || index}>
-                  <p>{question.text}</p>
+                  <p>{question.question}</p>
                 </div>
               ))}
             </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import  '../../../styles/pages/FlashCards.css'
+// import  '../../../styles/pages/FlashCards.css'
+import '../../../styles/pages/Merged.css';
 
 function FlashCardGenerator() {
   const Token = window.localStorage.getItem("token");
@@ -21,7 +22,7 @@ function FlashCardGenerator() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/generate_flashcards", {
+      const response = await fetch("https://5bf2-109-107-226-136.ngrok-free.app/generate_flashcards", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
