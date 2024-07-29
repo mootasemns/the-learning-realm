@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import user_icon from "../Assets/person.png";
 import email_icon from "../Assets/email.png";
 import password_icon from "../Assets/password.png";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "../../styles/pages/LoginSignup.css";
-import ResendVerification from '../pages/ResendVerification.tsx'
-import ForgotPassword from'../pages/ForgotPassword.tsx'
-
+import ResendVerification from "../pages/ResendVerification.tsx";
+import ForgotPassword from "../pages/ForgotPassword.tsx";
 
 const LoginSignup = () => {
   const [action, setAction] = useState("Sign Up");
-  const [isLoggedIn , setLoggedIn] = useState(false)
-  const navigate = useNavigate(); 
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   // State for Sign Up form
   const initialSignUpFormData = {
@@ -20,9 +19,6 @@ const LoginSignup = () => {
     password: "",
   };
 
-  
-
- 
   const [signUpFormData, setSignUpFormData] = useState(initialSignUpFormData);
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -34,28 +30,25 @@ const LoginSignup = () => {
     password: "",
   });
   const [loginError, setLoginError] = useState("");
-  const [isResendVerificationOpen, setIsResendVerificationOpen] = useState(false);
+  const [isResendVerificationOpen, setIsResendVerificationOpen] =
+    useState(false);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
 
-const handleOpenForgotPassword = () => {
-  setIsForgotPassword(true);
-};
+  const handleOpenForgotPassword = () => {
+    setIsForgotPassword(true);
+  };
 
-const handleCloseForgotPassword = () => {
-  setIsForgotPassword(false);
-};
-  
+  const handleCloseForgotPassword = () => {
+    setIsForgotPassword(false);
+  };
+
   const handleOpenResendVerification = () => {
-
     setIsResendVerificationOpen(true);
   };
 
   const handleCloseResendVerification = () => {
-
     setIsResendVerificationOpen(false);
   };
- 
-
 
   const handleSignUp = async () => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
@@ -113,7 +106,7 @@ const handleCloseForgotPassword = () => {
             setSignUpMessage(<div className="error-message">{data.error}</div>);
           } else {
             setSignUpMessage(
-              <div className="message">Registration Successful</div>
+              <div className="loginsignup-message">Registration Successful</div>
             );
             setAction("Login"); // Switch to login form
           }
@@ -146,22 +139,22 @@ const handleCloseForgotPassword = () => {
           body: JSON.stringify(loginFormData),
         }
       );
-  
+
       // Get the response data
       const data = await response.json();
       console.log("Login response:", data);
-  
+
       // Check for successful response
       if (response.ok) {
         // Check if the data contains a token
         if (data.status === "ok" && data.data) {
           console.log("Logged in successfully as:", loginFormData.email);
-  
+
           // Store token and login state
           window.localStorage.setItem("token", data.data);
           window.localStorage.setItem("loggedIn", true);
           setLoggedIn(true);
-  
+
           // Navigate to the home page
           navigate("/");
         } else {
@@ -185,7 +178,6 @@ const handleCloseForgotPassword = () => {
       setLoginError("Error during login: " + error.message);
     }
   };
-  
 
   const handleChange = (e, formType) => {
     const { name, value } = e.target;
@@ -204,123 +196,130 @@ const handleCloseForgotPassword = () => {
 
   return (
     <>
-    <div className="login-signup-background">
-      <div className="container">
-        <div className="submit-container-top">
-          <div
-            className={action === "Login" ? "submit-top gray" : "submit-top"}
-            onClick={() => {
-              setAction("Sign Up");
-            }}
-          >
-            Sign Up
-          </div>
-          <div
-            className={action === "Sign Up" ? "submit-top gray" : "submit-top"}
-            onClick={() => {
-              setAction("Login");
-            }}
-          >
-            Login
-          </div>
-        </div>
-        <div className="header">
-          <div className="text">{action}</div>
-          <div className="underline"></div>
-        </div>
-        {action === "Sign Up" ? (
-          <div className="inputs">
-            <div className="input">
-              <img src={user_icon} alt="" />
-              <input
-                type="text"
-                placeholder="Username"
-                name="username"
-                value={signUpFormData.username}
-                onChange={(e) => handleChange(e, "signUp")}
-              />
-              {nameError && <span className="error-message">{nameError}</span>}
+      <div className="login-signup-background">
+        <div className="loginsignup-container">
+          <div className="submit-container-top">
+            <div
+              className={action === "Login" ? "submit-top gray" : "submit-top"}
+              onClick={() => {
+                setAction("Sign Up");
+              }}
+            >
+              Sign Up
             </div>
-            <div className="input">
-              <img src={email_icon} alt="" />
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={signUpFormData.email}
-                onChange={(e) => handleChange(e, "signUp")}
-              />
-              {emailError && (
-                <span className="error-message">{emailError}</span>
+            <div
+              className={
+                action === "Sign Up" ? "submit-top gray" : "submit-top"
+              }
+              onClick={() => {
+                setAction("Login");
+              }}
+            >
+              Login
+            </div>
+          </div>
+          <div className="loginsignup-header">
+            <div className="loginsignup-text">{action}</div>
+            <div className="loginsignup-underline"></div>
+          </div>
+          {action === "Sign Up" ? (
+            <div className="loginsignup-inputs">
+              <div className="loginsignup-input">
+                <img src={user_icon} alt="" />
+                <input
+                  type="text"
+                  placeholder="Username"
+                  name="username"
+                  value={signUpFormData.username}
+                  onChange={(e) => handleChange(e, "signUp")}
+                />
+                {nameError && (
+                  <span className="error-message">{nameError}</span>
+                )}
+              </div>
+              <div className="loginsignup-input">
+                <img src={email_icon} alt="" />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={signUpFormData.email}
+                  onChange={(e) => handleChange(e, "signUp")}
+                />
+                {emailError && (
+                  <span className="error-message">{emailError}</span>
+                )}
+              </div>
+              <div className="loginsignup-input">
+                <img src={password_icon} alt="" />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={signUpFormData.password}
+                  onChange={(e) => handleChange(e, "signUp")}
+                />
+                {passwordError && (
+                  <span className="Passworderror-message">{passwordError}</span>
+                )}
+              </div>
+              {signUpMessage}
+            </div>
+          ) : (
+            <div className="loginsignup-inputs">
+              <div className="loginsignup-input">
+                <img src={email_icon} alt="" />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={loginFormData.email}
+                  onChange={(e) => handleChange(e, "login")}
+                />
+              </div>
+              <div className="loginsignup-input">
+                <img src={password_icon} alt="" />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={loginFormData.password}
+                  onChange={(e) => handleChange(e, "login")}
+                />
+              </div>
+              {loginError && (
+                <span className="error-message">{loginError}</span>
               )}
+              <div className="forgot-password">
+                Lost Password?{" "}
+                <a onClick={handleOpenForgotPassword}>Click here!</a>
+                <p className="forgot-password">
+                  Didn't recieve verification link ?{" "}
+                  <a onClick={handleOpenResendVerification}>Send again</a>
+                </p>
+              </div>
             </div>
-            <div className="input">
-              <img src={password_icon} alt="" />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={signUpFormData.password}
-                onChange={(e) => handleChange(e, "signUp")}
-              />
-              {passwordError && (
-                <span className="Passworderror-message">{passwordError}</span>
-              )}
-            </div>
-            {signUpMessage}
-          </div>
-        ) : (
-          <div className="inputs">
-            <div className="input">
-              <img src={email_icon} alt="" />
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={loginFormData.email}
-                onChange={(e) => handleChange(e, "login")}
-              />
-            </div>
-            <div className="input">
-              <img src={password_icon} alt="" />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={loginFormData.password}
-                onChange={(e) => handleChange(e, "login")}
-              />
-            </div>
-            {loginError && <span className="error-message">{loginError}</span>}
-            <div className="forgot-password">
-              Lost Password? <a onClick={handleOpenForgotPassword }>Click here!</a>
-              <p className="forgot-password">
-            Didn't recieve verification link ? <a  onClick={handleOpenResendVerification}>Send again</a>
-            </p>
+          )}
+          <div className="submit-container-bot">
+            <div
+              className={action === "Login" ? "submit-bot " : "submit-bot"}
+              onClick={action === "Sign Up" ? handleSignUp : handleLogin}
+            >
+              {action === "Sign Up" ? "Sign Up" : "Login"}
             </div>
           </div>
-        )}
-        <div className="submit-container-bot">
-          <div
-            className={action === "Login" ? "submit-bot " : "submit-bot"}
-            onClick={action === "Sign Up" ? handleSignUp : handleLogin}
-          >
-            {action === "Sign Up" ? "Sign Up" : "Login"}
-          </div>
+          {isLoggedIn && <div>You are logged in!</div>}
         </div>
-        {isLoggedIn && <div>You are logged in!</div>}
       </div>
-    </div>
-    {isResendVerificationOpen && (
-      <ResendVerification onClose={handleCloseResendVerification} />
-    )}
-    <div>
-    {isForgotPassword&& (
-      <ForgotPassword onClose={handleCloseForgotPassword} />
-    )}
-    </div>
+      {isResendVerificationOpen && (
+        <ResendVerification onClose={handleCloseResendVerification} />
+      )}
+      <div>
+        {isForgotPassword && (
+          <ForgotPassword onClose={handleCloseForgotPassword} />
+        )}
+      </div>
     </>
-  
   );
 };
 

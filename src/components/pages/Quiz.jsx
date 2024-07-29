@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../../styles/pages/Quiz.css';
+import "../../styles/pages/Quiz.css";
 
 const Quiz = ({ data }) => {
   const Token = window.localStorage.getItem("token");
@@ -49,7 +49,6 @@ const Quiz = ({ data }) => {
     window.location.reload();
   };
 
-
   const handleBookmarkMCQ = async () => {
     if (Token) {
       try {
@@ -89,8 +88,8 @@ const Quiz = ({ data }) => {
   const renderFinishPage = () => {
     return (
       <div className="quizpagebody">
-        <div className="container">
-          <div className="header">
+        <div className="quiz-container">
+          <div className="quiz-header">
             <h1>{reviewMode ? "Quiz Review" : "Quiz Finished"}</h1>
             <span className="share-icon" onClick={handleBookmarkMCQ}>
               Share
@@ -103,8 +102,17 @@ const Quiz = ({ data }) => {
             </h2>
           )}
           {!reviewMode ? (
-            <div style={{ textAlign: "center", marginTop: "20px", display: "flex", justifyContent: "center" }}>
-              <button onClick={handleReview} style={{ marginRight: "20px" }}>Review</button>
+            <div
+              style={{
+                textAlign: "center",
+                marginTop: "20px",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <button onClick={handleReview} style={{ marginRight: "20px" }}>
+                Review
+              </button>
               <button onClick={handleFinish}>Finish</button>
             </div>
           ) : (
@@ -139,7 +147,7 @@ const Quiz = ({ data }) => {
             </div>
           )}
         </div>
-        {message && <div className="message">{message}</div>}
+        {message && <div className="quiz-message">{message}</div>}
       </div>
     );
   };
@@ -152,8 +160,8 @@ const Quiz = ({ data }) => {
 
   return (
     <div className="quizpagebody">
-      <div className="container">
-        <div className="header">
+      <div className="quiz-container">
+        <div className="quiz-header">
           <h1>Quiz App</h1>
           <span className="share-text" onClick={handleBookmarkMCQ}>
             Share
@@ -200,7 +208,7 @@ const Quiz = ({ data }) => {
           {index + 1} of {data.length} questions
         </div>
       </div>
-      {message && <div className="message">{message}</div>}
+      {message && <div className="quiz-message">{message}</div>}
     </div>
   );
 };

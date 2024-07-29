@@ -1,4 +1,3 @@
-/* Apply background only to the LoginSignup component */
 .login-signup-background {
   background: linear-gradient(#2a00b7, #42006c);
   min-height: 100vh;
@@ -7,14 +6,14 @@
   align-items: center;
 }
 
-.container {
+.loginsignup-container {
   display: flex;
   flex-direction: column;
   width: 600px;
   background: #fff;
   padding-bottom: 30px;
-  padding-top: 60px; /* Add padding to the top to accommodate the top buttons */
-  position: relative; /* Set position to relative */
+  padding-top: 60px;
+  position: relative;
 }
 
 .submit-container-top {
@@ -44,7 +43,7 @@
   color: #676767;
 }
 
-.header {
+.loginsignup-header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,27 +52,27 @@
   margin-top: 30px;
 }
 
-.text {
+.loginsignup-text {
   color: #3c009d;
   font-size: 48px;
   font-weight: 700;
 }
 
-.underline {
+.loginsignup-underline {
   width: 61px;
   height: 6px;
   background: #3c009d;
   border-radius: 9px;
 }
 
-.inputs {
+.loginsignup-inputs {
   margin-top: 55px;
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 
-.input {
+.loginsignup-input {
   display: flex;
   align-items: center;
   width: 480px;
@@ -82,11 +81,11 @@
   border-radius: 6px;
 }
 
-.input img {
+.loginsignup-input img {
   margin: 0px 30px;
 }
 
-.input input {
+.loginsignup-input input {
   height: 50px;
   width: 400px;
   background: transparent;
@@ -133,8 +132,8 @@
   font-size: 19px;
   font-weight: 700;
   cursor: pointer;
-  border: 1px solid #4c00b4; /* Add border to distinguish */
-  border-radius: 25px; /* Make it rectangular */
+  border: 1px solid #4c00b4;
+  border-radius: 25px;
 }
 
 .error-message {
@@ -150,7 +149,7 @@
   font-size: 10px;
 }
 
-.message {
+.loginsignup-message {
   color: green;
   font-size: 1em;
   margin-top: 10px;

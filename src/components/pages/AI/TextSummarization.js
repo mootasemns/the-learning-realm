@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import '../../../styles/pages/TextSummarization.css';
 import "../../../styles/pages/Merged.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -71,6 +70,7 @@ function TextSummarization() {
       .then(() => alert("Text copied to clipboard!"))
       .catch((error) => console.error("Error copying text:", error));
   };
+
   const handleShareText = (text) => {
     alert("Bookmark functionality is not implemented yet.");
   };
@@ -155,6 +155,11 @@ function TextSummarization() {
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={handleKeyDown}
+              style={{
+                height: inputText
+                  ? `${Math.min(inputText.split("\n").length * 1.6, 15)}rem`
+                  : "auto",
+              }}
             />
           </div>
         </div>
