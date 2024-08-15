@@ -34,28 +34,13 @@ const Footer=()=>{
               </a>
             </div>
             
-            <div className="sb_footer-links_div">
-              <h4>Partners</h4>
-              <hr></hr>
-              <a href="/employer">
-                <p>Swing Tech</p>
-              </a>
-            </div>
+
             
             <div className="sb_footer-links_div">
               <h4>Company</h4>
               <hr></hr>
-              <a href="/about">
+              <a href="/About_Us">
                 <p>About</p>
-              </a>
-              <a href="/press">
-                <p>Press</p>
-              </a>
-              <a href="/career">
-                <p>Career</p>
-              </a>
-              <a href="/contact">
-                <p>Contact</p>
               </a>
             </div>
           </div>

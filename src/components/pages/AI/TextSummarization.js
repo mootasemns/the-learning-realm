@@ -15,6 +15,7 @@ function TextSummarization() {
       setMessages(newMessages);
 
       try {
+        setInputText("");
         const response = await fetch(
           "https://5bf2-109-107-226-136.ngrok-free.app/summarize/",
           {
@@ -40,6 +41,7 @@ function TextSummarization() {
           ]);
         }
       } catch (error) {
+        setInputText("");
         console.error("Error fetching data:", error);
         setMessages([
           ...newMessages,
@@ -49,8 +51,6 @@ function TextSummarization() {
           },
         ]);
       }
-
-      setInputText("");
     }
   };
 
@@ -165,7 +165,7 @@ function TextSummarization() {
         </div>
         <div className="buttons">
           <button onClick={handleClearMessages}>Clear</button>
-          <button onClick={handleSendMessage}>Send</button>
+          <button onClick={handleSendMessage}>Generate</button>
         </div>
       </div>
     </div>

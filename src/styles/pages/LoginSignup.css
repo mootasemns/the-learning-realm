@@ -4,16 +4,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1em;
 }
 
 .loginsignup-container {
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   background: #fff;
-  padding-bottom: 30px;
-  padding-top: 60px;
+  padding: 3em 1em;
   position: relative;
+  box-sizing: border-box;
 }
 
 .submit-container-top {
@@ -29,13 +31,13 @@
   justify-content: center;
   align-items: center;
   flex: 1;
-  height: 59px;
+  height: 3.5em;
   color: #fff;
   background: #4c00b4;
-  font-size: 19px;
+  font-size: 1.2em;
   font-weight: 700;
   cursor: pointer;
-  border-radius: 0px; /* Make it rectangular */
+  border-radius: 0;
 }
 
 .submit-top.gray {
@@ -47,111 +49,156 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 9px;
+  gap: 0.5em;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 2em;
 }
 
 .loginsignup-text {
   color: #3c009d;
-  font-size: 48px;
+  font-size: 3em;
   font-weight: 700;
+  text-align: center;
 }
 
 .loginsignup-underline {
-  width: 61px;
-  height: 6px;
+  width: 3.8em;
+  height: 0.4em;
   background: #3c009d;
-  border-radius: 9px;
+  border-radius: 0.5em;
 }
 
 .loginsignup-inputs {
-  margin-top: 55px;
+  margin-top: 3em;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 1.5em;
 }
 
 .loginsignup-input {
   display: flex;
   align-items: center;
-  width: 480px;
-  height: 80px;
+  height: 5em;
   background: #eaeaea;
-  border-radius: 6px;
+  border-radius: 0.4em;
+  padding: 0 1em;
+  box-sizing: border-box;
 }
 
 .loginsignup-input img {
-  margin: 0px 30px;
+  margin-right: 1em;
 }
 
 .loginsignup-input input {
-  height: 50px;
-  width: 400px;
+  flex: 1;
+  height: 3em;
   background: transparent;
   border: none;
   outline: none;
   color: #797979;
-  font-size: 19px;
+  font-size: 1em;
 }
 
 .forgot-password {
-  margin-top: 27px;
+  margin-top: 1.5em;
   color: #797979;
-  font-size: 15px;
+  font-size: 0.9em;
+  text-align: center;
 }
 
-.forgot-password a {
-  color: #4c00b4;
-  cursor: pointer;
-}
-
+.forgot-password a,
 .forgot-password span {
   color: #4c00b4;
   cursor: pointer;
 }
 
-.forgot-password p a {
-  color: #3c009d;
-  cursor: pointer;
-}
 .submit-container-bot {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 2em;
 }
 
 .submit-bot {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 300px;
-  height: 59px;
+  width: 50%;
+  max-width: 300px;
+  height: 3.5em;
   color: #fff;
   background: #4c00b4;
-  font-size: 19px;
+  font-size: 1.2em;
   font-weight: 700;
   cursor: pointer;
   border: 1px solid #4c00b4;
-  border-radius: 25px;
+  border-radius: 1.5em;
 }
 
 .error-message {
   color: red;
-  font-size: 12px;
-  margin-top: 5px;
+  font-size: 0.75em;
+  margin-top: 0.3em;
   word-wrap: break-word;
   text-align: center;
 }
 
 .Passworderror-message {
   color: red;
-  font-size: 10px;
+  font-size: 0.6em;
 }
 
 .loginsignup-message {
   color: green;
   font-size: 1em;
-  margin-top: 10px;
+  margin-top: 0.6em;
   text-align: center;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 1200px) {
+  .loginsignup-text {
+    font-size: 2.5em;
+  }
+  .loginsignup-input input {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 992px) {
+  .loginsignup-text {
+    font-size: 2em;
+  }
+  .loginsignup-input {
+    height: 4.5em;
+  }
+}
+
+@media (max-width: 768px) {
+  .loginsignup-container {
+    padding: 2em 1em;
+  }
+  .loginsignup-text {
+    font-size: 1.8em;
+  }
+  .loginsignup-input {
+    height: 4em;
+  }
+  .loginsignup-input input {
+    font-size: 0.8em;
+  }
+  .submit-bot {
+    width: 70%;
+  }
+}
+
+@media (max-width: 576px) {
+  .loginsignup-text {
+    font-size: 1.5em;
+  }
+  .loginsignup-input {
+    height: 3.5em;
+  }
+  .submit-bot {
+    width: 80%;
+  }
 }

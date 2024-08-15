@@ -8,6 +8,8 @@
 }
 
 header {
+  position: relative;
+  z-index: 6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,26 +17,27 @@ header {
   background-color: var(--mainColor);
   color: var(--textColor);
   width: 100%;
-  flex-grow: 1; /* Ensures nav-items take available space */
 }
 
 .nav-items {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   max-width: 1200px;
-  padding: 50px;
+  padding: 0 30px;
 }
 
 .nav-button {
-  margin-left: 10px;
+  display: flex;
 }
 
 .nav-button .btn {
   width: 80px;
-  height: 30px;
-  margin: 10px 10px;
+  height: 40px;
+  margin: 10px;
   font-weight: bold;
+  font-size: 1rem;
   font-family: "Ubuntu", monospace;
   background: rgba(255, 255, 255, 0.4);
 }
@@ -60,7 +63,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 nav span {
@@ -75,17 +78,14 @@ nav span:hover {
 
 .user-icon {
   cursor: pointer;
-  margin-left: 10px;
   display: flex;
   align-items: center;
-  position: relative;
-  margin: 30px;
 }
 
 .user-menu {
   position: absolute;
-  margin-left: 50%;
-  margin-right: 50%;
+  right: 0;
+  top: 60px;
   width: 100px;
   background-color: #333;
   color: white;
@@ -108,46 +108,65 @@ nav span:hover {
   background-color: #444;
 }
 
+.menu-btn {
+  display: none;
+  cursor: pointer;
+}
+
+.close-btn {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
 @media only screen and (max-width: 1024px) {
   .nav-items {
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
+    justify-content: space-between;
+    padding: 0 10px;
   }
 
-  nav {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .user-menu {
-    width: 120px;
+  .nav-button {
+    display: none;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  header .nav-btn {
-    visibility: visible;
-    opacity: 1;
+  .menu-btn {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
-  header nav {
+  nav {
     position: fixed;
     top: -100vh;
     left: 0;
-    height: 100%;
+    height: 50%;
     width: 100%;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
     background-color: var(--mainColor);
-    transition: 1s;
+    transition: 0.3s;
+    z-index: 1000;
   }
 
-  header .responsive_nav {
-    transform: translateY(100vh);
+  nav.responsive_nav {
+    top: 0;
+  }
+
+  .nav-button {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .close-btn {
+    display: block;
   }
 
   nav span {
@@ -165,10 +184,20 @@ nav span:hover {
     padding: 0.5rem;
   }
 
+  nav {
+    height: 50%;
+  }
+
   .nav-button .btn {
     width: 70px;
     height: 25px;
     font-size: 0.8rem;
+  }
+
+  .nav-button {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .user-menu {

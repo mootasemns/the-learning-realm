@@ -1,26 +1,36 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHome,
+  faUser,
+  faBars,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-
 import "../styles/Navbar.css";
-import { ReactComponent as Logo } from "../logo.svg";
+import { ReactComponent as SVG } from "./Assets/logo.svg";
 
 function Navbar() {
   const navigate = useNavigate();
   const userIconRef = useRef(null);
   const menuRef = useRef(null);
   const [showMenu, setShowMenu] = useState(false);
+  const [showResponsiveMenu, setShowResponsiveMenu] = useState(false);
   const isLoggedIn = window.localStorage.getItem("loggedIn");
 
   const handleLogout = () => {
     window.localStorage.clear();
     toggleMenu();
-    navigate("/Explore");
+    window.location.reload();
+    navigate("/");
   };
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  const toggleResponsiveMenu = () => {
+    setShowResponsiveMenu(!showResponsiveMenu);
   };
 
   const handleTabClick = (route) => {
@@ -29,9 +39,9 @@ function Navbar() {
     } else {
       navigate(route);
     }
+    setShowResponsiveMenu(false);
   };
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -53,9 +63,9 @@ function Navbar() {
     <>
       <header>
         <div className="nav-items">
-          <nav>
+          <nav className={showResponsiveMenu ? "responsive_nav" : ""}>
             <div className="logo" onClick={() => handleTabClick("/")}>
-              <Logo />
+              <SVG />
             </div>
             <span onClick={() => handleTabClick("/")}>Home</span>
             <span onClick={() => handleTabClick("/AI_Services")}>
@@ -64,30 +74,33 @@ function Navbar() {
             <span onClick={() => handleTabClick("/LearningHub")}>
               Learning Hub
             </span>
-            <span onClick={() => handleTabClick("/")}>Our Solutions</span>
+            <span onClick={() => handleTabClick("/CheatDetector")}>
+              Our Solutions
+            </span>
             <span onClick={() => handleTabClick("/About_Us")}>About Us</span>
             {isLoggedIn === "true" ? (
-              <>
-                <div
-                  className="user-icon"
-                  onClick={toggleMenu}
-                  ref={userIconRef}
-                >
-                  <FontAwesomeIcon icon={faUser} size="2x" />
-                </div>
-              </>
+              <div className="user-icon" onClick={toggleMenu} ref={userIconRef}>
+                <FontAwesomeIcon icon={faUser} size="2x" />
+              </div>
             ) : (
               <span onClick={() => handleTabClick("/LoginSignup")}>Login</span>
             )}
+            {showResponsiveMenu && (
+              <div className="close-btn" onClick={toggleResponsiveMenu}>
+                <FontAwesomeIcon icon={faTimes} size="2x" />
+              </div>
+            )}
+            <div className="nav-button">
+              <button className="btn" id="liBtn">
+                Light
+              </button>
+              <button className="btn" id="DaBtn">
+                Dark
+              </button>
+            </div>
           </nav>
-
-          <div className="nav-button">
-            <button className="btn" id="liBtn">
-              Light
-            </button>
-            <button className="btn" id="DaBtn">
-              Dark
-            </button>
+          <div className="menu-btn" onClick={toggleResponsiveMenu}>
+            <FontAwesomeIcon icon={faBars} size="2x" />
           </div>
         </div>
       </header>

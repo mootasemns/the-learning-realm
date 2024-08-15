@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "../../styles/pages/AI_Services.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import AIPageContent from "./AI/AIPageContent";
 
 function AI_Services() {
@@ -11,6 +14,15 @@ function AI_Services() {
 
   return (
     <div className="AI_Services">
+      <label className="scc-button-label" htmlFor="scc-button">
+        <FontAwesomeIcon icon={faBars} size="2x" />
+      </label>
+      <input
+        type="checkbox"
+        name="sidebar-collapse-check"
+        className="sidebar-collapse-check"
+        id="scc-button"
+      />
       <div className="sidebar">
         <a onClick={() => selectService("Text Summarization")}>
           Text Summarization
@@ -30,6 +42,7 @@ function AI_Services() {
         <a onClick={() => selectService("Grammar Checker")}>Grammar Checker</a>
       </div>
       <div className="content">
+        <div className="background-sidebar-blur"></div>
         <AIPageContent selectedService={selectedService} />
       </div>
     </div>

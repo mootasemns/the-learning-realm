@@ -4,9 +4,8 @@ import MCQQuizGenerator from "./MCQQuizGenerator.js";
 import FlashCardGenerator from "./FlashCardGenerator.js";
 import QuestionGenerator from "./QuestionGenerator.js";
 import TextToSpeech from "./TextToSpeech.js";
-import GrammerCheck from './GrammerCheck.js'
+import GrammerCheck from "./GrammerCheck.js";
 const AIPageContent = ({ selectedService }) => {
-
   let content = <div>Select a service from the sidebar</div>;
 
   switch (selectedService) {
@@ -32,7 +31,7 @@ const AIPageContent = ({ selectedService }) => {
       content = <div>No content available for {selectedService}</div>;
   }
 
-  return <div>{content}</div>;
+  return <>{content}</>;
 };
 
 export default AIPageContent;

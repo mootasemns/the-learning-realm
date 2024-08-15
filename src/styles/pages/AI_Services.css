@@ -1,25 +1,27 @@
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-}
-
 .AI_Services {
   display: flex;
   min-height: 100vh;
+  flex-direction: row;
+  position: relative;
 }
 
 .sidebar {
-  width: 240px;
+  line-height: 1.6;
+  font-family: Arial;
+  width: 0px;
   background-color: #f4f4f4;
   padding-top: 80px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  position: static;
+  transition: width 0.3s ease-in-out;
+  will-change: width;
+  z-index: 5;
 }
 
 .sidebar a {
+  user-select: none;
+  cursor: pointer;
   display: block;
+  width: 240px;
   color: #333;
   font-size: 1.2em;
   padding: 10px 15px;
@@ -32,82 +34,63 @@ body {
 }
 
 .content {
-  flex: 1;
   background-color: #f7f9fc;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 20px;
+  width: 100%;
+  z-index: 2;
 }
 
-/* Responsive Design */
-
-@media (max-width: 1200px) {
-  .sidebar {
-    width: 200px;
-  }
-
-  .sidebar a {
-    font-size: 1.1em;
-  }
+.sidebar-collapse-check {
+  display: none;
 }
 
-@media (max-width: 992px) {
-  .sidebar {
-    width: 180px;
-  }
+.background-sidebar-blur {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(68, 68, 68, 0.219);
+  top: 0;
+  left: 0;
+  z-index: 2;
+  backdrop-filter: blur(2px);
+  pointer-events: none;
 
-  .sidebar a {
-    font-size: 1em;
-  }
-
-  .content {
-    padding: 20px;
-  }
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
-@media (max-width: 768px) {
-  .AI_Services {
-    flex-direction: column;
+@media screen and (max-width: 650px) {
+  .sidebar-collapse-check:checked + .sidebar {
+    width: 240px;
+    height: 100%;
   }
 
-  .sidebar {
-    width: 100%;
-    height: auto;
-    box-shadow: none;
+  .sidebar-collapse-check:checked ~ .content .background-sidebar-blur {
+    display: block;
+    opacity: 1;
   }
 
-  .sidebar a {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-  }
-}
-
-@media (max-width: 576px) {
-  .sidebar {
-    padding-top: 60px;
-  }
-
-  .sidebar a {
-    font-size: 0.9em;
-  }
-
-  .content {
-    padding: 15px;
-  }
-}
-
-@media (max-width: 400px) {
-  .sidebar {
-    padding-top: 40px;
-  }
-
-  .sidebar a {
-    font-size: 0.8em;
-    padding: 8px 12px;
-  }
-
-  .content {
+  .scc-button-label {
+    cursor: pointer;
+    user-select: none;
+    z-index: 1000;
     padding: 10px;
+    height: fit-content;
+    width: fit-content;
+  }
+  .sidebar {
+    position: absolute;
+    width: 0px;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .scc-button-label {
+    display: none;
+  }
+  .sidebar {
+    width: 240px;
   }
 }

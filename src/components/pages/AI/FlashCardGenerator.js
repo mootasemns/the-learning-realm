@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-// import  '../../../styles/pages/FlashCards.css'
+import { useNavigate } from 'react-router-dom';
 import '../../../styles/pages/Merged.css';
 
 function FlashCardGenerator() {
   const Token = window.localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const [inputText, setInputText] = useState("");
   const [flashCardData, setFlashCardData] = useState(null);
@@ -22,7 +23,7 @@ function FlashCardGenerator() {
     }
 
     try {
-      const response = await fetch("https://5bf2-109-107-226-136.ngrok-free.app/generate_flashcards", {
+      const response = await fetch("https://c80a-109-107-224-62.ngrok-free.app/generate_flashcards", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,13 +32,17 @@ function FlashCardGenerator() {
       });
 
       const data = await response.json();
-      console.log("data : " , data)
+      console.log("data :", data);
 
       if (!response.ok) {
         throw new Error("Failed to generate flashcards");
       }
 
       setFlashCardData(data);
+
+      // Navigate to Flashcards page with flashCardData as state
+      navigate('/flashcards', { state: { flashcards: data } });
+
     } catch (error) {
       setError(error);
       console.error("Error generating flashcards:", error);
@@ -54,37 +59,36 @@ function FlashCardGenerator() {
 
   const handleBookmarkFlashCard = async (text) => {
     if (Token) {
-        console.log("Token : ", Token);
-        try {
-            const response = await fetch("https://gp-server-vxwf.onrender.com/api/saved/generate_flashcards/", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    token: Token, 
-                    flashcards: [text]
-                }),
-            });
-            const result = await response.json();
-            console.log("result : " , result )
-            if (response.ok) {
-                if (result.success) {
-                    alert("FlashCard bookmarked successfully!");
-                } else {
-                    alert("Failed to bookmark flashcard.");
-                }
-            } else {
-                alert("Failed to bookmark flashcard.");
-            }
-        } catch (error) {
-            console.error("Error bookmarking flashcard:", error);
-            alert("Error bookmarking flashcard. Please try again.");
+      try {
+        const response = await fetch("https://gp-server-vxwf.onrender.com/api/saved/generate_flashcards/", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            token: Token, 
+            flashcards: [text]
+          }),
+        });
+        const result = await response.json();
+        console.log("result :", result);
+        if (response.ok) {
+          if (result.success) {
+            alert("FlashCard bookmarked successfully!");
+          } else {
+            alert("Failed to bookmark flashcard.");
+          }
+        } else {
+          alert("Failed to bookmark flashcard.");
         }
+      } catch (error) {
+        console.error("Error bookmarking flashcard:", error);
+        alert("Error bookmarking flashcard. Please try again.");
+      }
     } else {
-        alert("No token found. Please log in.");
+      alert("No token found. Please log in.");
     }
-};
+  };
 
   return (
     <div className="page-container">
@@ -93,12 +97,7 @@ function FlashCardGenerator() {
         <div id="ai-service" className="title">Flashcard Generator</div>
         <div className="outbox">
           <div className="chat-box">
-            {/* {flashCardData && flashCardData.map((card, index) => (
-              <div key={index} className="flashcard">
-                <p><strong>{card.word}</strong></p>
-                <p>{card.meaning}</p>
-              </div>
-            ))} */}
+            {/* Optionally display generated flashcards before navigation */}
           </div>
           <div className="inputs">
             <textarea

@@ -1,6 +1,10 @@
 import React, { useState, useRef } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark, faDownload, faShare } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBookmark,
+  faDownload,
+  faShare,
+} from "@fortawesome/free-solid-svg-icons";
 
 function TextToSpeech() {
   const Token = window.localStorage.getItem("token");
@@ -77,41 +81,42 @@ function TextToSpeech() {
     }
   };
 
- 
   const handleBookmarkAudio = async (text) => {
     if (Token) {
-        console.log("Token : ", Token);
-        try {
-            const response = await fetch("https://gp-server-vxwf.onrender.com/api/saved/audios/", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    token: Token, 
-                    audios: [text]
-                }),
-            });
-            const result = await response.json();
-            console.log("result : " , result )
-            if (response.ok) {
-                if (result.success) {
-                    alert("Audio bookmarked successfully!");
-                } else {
-                    alert("Failed to bookmark audio.");
-                }
-            } else {
-                alert("Failed to bookmark audio.");
-            }
-        } catch (error) {
-            console.error("Error bookmarking audio:", error);
-            alert("Error bookmarking audio. Please try again.");
+      console.log("Token : ", Token);
+      try {
+        const response = await fetch(
+          "https://gp-server-vxwf.onrender.com/api/saved/audios/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              token: Token,
+              audios: [text],
+            }),
+          }
+        );
+        const result = await response.json();
+        console.log("result : ", result);
+        if (response.ok) {
+          if (result.success) {
+            alert("Audio bookmarked successfully!");
+          } else {
+            alert("Failed to bookmark audio.");
+          }
+        } else {
+          alert("Failed to bookmark audio.");
         }
+      } catch (error) {
+        console.error("Error bookmarking audio:", error);
+        alert("Error bookmarking audio. Please try again.");
+      }
     } else {
-        alert("No token found. Please log in.");
+      alert("No token found. Please log in.");
     }
-};
-
+  };
 
   return (
     <div className="page-container">
@@ -131,7 +136,10 @@ function TextToSpeech() {
                   <div className="audio-share-icon" onClick={handleShareAudio}>
                     <FontAwesomeIcon icon={faShare} />
                   </div>
-                  <div className="audio-bookmark-icon" onClick={handleBookmarkAudio}>
+                  <div
+                    className="audio-bookmark-icon"
+                    onClick={handleBookmarkAudio}
+                  >
                     <FontAwesomeIcon icon={faBookmark} />
                   </div>
                 </div>
@@ -153,7 +161,7 @@ function TextToSpeech() {
         </div>
         <div className="buttons">
           <button onClick={handleClearMessages}>Clear</button>
-          <button onClick={handleSendMessage}>Send</button>
+          <button onClick={handleSendMessage}>Generate</button>
         </div>
       </div>
     </div>
