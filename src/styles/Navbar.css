@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap");
 
 :root {
-  --mainColor: #fff;
+  --mainColor: #ffffff;
   --mainColorLight: #5767aa;
   --secondaryColor: #db2b39;
   --textColor: #000;
@@ -15,8 +15,8 @@ header {
   justify-content: center;
   height: 80px;
   background-color: var(--mainColor);
-  color: var(--textColor);
   width: 100%;
+  padding: 48px 32px;
 }
 
 .nav-items {
@@ -30,12 +30,14 @@ header {
 
 .nav-button {
   display: flex;
+  gap: 10px;
 }
 
 .nav-button .btn {
-  width: 80px;
+  width: auto;
   height: 40px;
   margin: 10px;
+  padding: 0 15px;
   font-weight: bold;
   font-size: 1rem;
   font-family: "Ubuntu", monospace;
@@ -67,9 +69,10 @@ nav {
 }
 
 nav span {
-  color: var(--textColor);
-  text-decoration: none;
   cursor: pointer;
+  font-family: Noto Sans;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 nav span:hover {

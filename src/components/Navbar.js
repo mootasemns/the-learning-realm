@@ -16,7 +16,20 @@ function Navbar() {
   const menuRef = useRef(null);
   const [showMenu, setShowMenu] = useState(false);
   const [showResponsiveMenu, setShowResponsiveMenu] = useState(false);
+  const [theme, setTheme] = useState("light");
   const isLoggedIn = window.localStorage.getItem("loggedIn");
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
+
+  const toggleTheme = (theme) => {
+    setTheme(theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  };
 
   const handleLogout = () => {
     window.localStorage.clear();
@@ -91,10 +104,18 @@ function Navbar() {
               </div>
             )}
             <div className="nav-button">
-              <button className="btn" id="liBtn">
+              <button
+                className="btn"
+                id="liBtn"
+                onClick={() => toggleTheme("light")}
+              >
                 Light
               </button>
-              <button className="btn" id="DaBtn">
+              <button
+                className="btn"
+                id="DaBtn"
+                onClick={() => toggleTheme("dark")}
+              >
                 Dark
               </button>
             </div>
