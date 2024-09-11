@@ -5,16 +5,15 @@ function Home() {
   const navigate = useNavigate();
 
   const isLoggedIn = () => {
-    return false;
+    return localStorage.getItem("loggedIn") === "true";
   };
 
   const handleTabClick = (route) => {
-    if (route === "/Profile") {
-      if (!isLoggedIn()) {
-        route = "/LoginSignup";
-      }
+    if (route === "/Profile" && !isLoggedIn()) {
+      navigate("/LoginSignup");
+    } else {
+      navigate(route);
     }
-    navigate(route);
   };
 
   return (
@@ -89,10 +88,10 @@ function Home() {
                 </div>
                 <div className="cta-actions">
                   <button
-                    type="button"
-                    className="thq-button-filled cta-button"
+                    className="button-filled button body-small"
+                    onClick={() => handleTabClick("/Ai_Services")}
                   >
-                    <span>Get Started</span>
+                    Get Started
                   </button>
                 </div>
               </div>

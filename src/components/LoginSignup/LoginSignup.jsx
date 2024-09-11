@@ -51,7 +51,7 @@ const LoginSignup = () => {
   };
 
   const handleSignUp = async () => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
     let isValid = true;
@@ -64,7 +64,7 @@ const LoginSignup = () => {
     }
 
     if (!emailRegex.test(signUpFormData.email)) {
-      setEmailError("Field should contain valid Gmail address");
+      setEmailError("Field should contain valid Email address");
       isValid = false;
     } else {
       setEmailError("");

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import '../../../styles/pages/Merged.css';
+import { useNavigate } from "react-router-dom";
+import "../../../styles/pages/Merged.css";
 
 function FlashCardGenerator() {
   const Token = window.localStorage.getItem("token");
@@ -23,13 +23,17 @@ function FlashCardGenerator() {
     }
 
     try {
-      const response = await fetch("https://c80a-109-107-224-62.ngrok-free.app/generate_flashcards", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text: inputText }),
-      });
+      setInputText("");
+      const response = await fetch(
+        "https://e7d2-109-107-224-76.ngrok-free.app/generate_flashcards",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: inputText }),
+        }
+      );
 
       const data = await response.json();
       console.log("data :", data);
@@ -41,8 +45,7 @@ function FlashCardGenerator() {
       setFlashCardData(data);
 
       // Navigate to Flashcards page with flashCardData as state
-      navigate('/flashcards', { state: { flashcards: data } });
-
+      navigate("/flashcards", { state: { flashcards: data } });
     } catch (error) {
       setError(error);
       console.error("Error generating flashcards:", error);
@@ -60,16 +63,19 @@ function FlashCardGenerator() {
   const handleBookmarkFlashCard = async (text) => {
     if (Token) {
       try {
-        const response = await fetch("https://gp-server-vxwf.onrender.com/api/saved/generate_flashcards/", {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            token: Token, 
-            flashcards: [text]
-          }),
-        });
+        const response = await fetch(
+          "https://gp-server-vxwf.onrender.com/api/saved/generate_flashcards/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              token: Token,
+              flashcards: [text],
+            }),
+          }
+        );
         const result = await response.json();
         console.log("result :", result);
         if (response.ok) {
@@ -94,7 +100,9 @@ function FlashCardGenerator() {
     <div className="page-container">
       <h2 className="main-text">Try our AI services.</h2>
       <div className="container">
-        <div id="ai-service" className="title">Flashcard Generator</div>
+        <div id="ai-service" className="title">
+          Flashcard Generator
+        </div>
         <div className="outbox">
           <div className="chat-box">
             {/* Optionally display generated flashcards before navigation */}

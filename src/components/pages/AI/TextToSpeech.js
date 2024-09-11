@@ -20,8 +20,9 @@ function TextToSpeech() {
       setInputText("");
 
       try {
+        setInputText("");
         const response = await fetch(
-          "https://5bf2-109-107-226-136.ngrok-free.app/TextToSpeech/",
+          "https://e7d2-109-107-224-76.ngrok-free.app/TextToSpeech/",
           {
             method: "POST",
             headers: {

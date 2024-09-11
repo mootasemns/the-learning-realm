@@ -16,8 +16,8 @@ const Profile = () => {
   const [audios, setAudios] = useState([]);
   const [flashcards, setFlashcards] = useState([]);
   const [activeTab, setActiveTab] = useState("Summaries");
-  const [deleteItem, setDeleteItem] = useState(null); // For handling which item to delete
-  const [showConfirm, setShowConfirm] = useState(false); // For showing confirmation modal
+  const [deleteItem, setDeleteItem] = useState(null); 
+  const [showConfirm, setShowConfirm] = useState(false); 
 
   const getUserData = async () => {
     try {
@@ -43,7 +43,6 @@ const Profile = () => {
         } else {
           console.log("data : ", data.data);
           setUsername(data.data.username || "");
-          // Reset state before setting new data
           setQuizzes(data.data.quizzes || []);
           setSummaries(data.data.summaries || []);
           setQuestions(data.data.questions || []);

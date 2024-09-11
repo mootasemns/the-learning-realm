@@ -17,7 +17,7 @@ function TextSummarization() {
       try {
         setInputText("");
         const response = await fetch(
-          "https://5bf2-109-107-226-136.ngrok-free.app/summarize/",
+          "https://e7d2-109-107-224-76.ngrok-free.app/summarize/",
           {
             method: "POST",
             headers: {
@@ -72,7 +72,7 @@ function TextSummarization() {
   };
 
   const handleShareText = (text) => {
-    alert("Bookmark functionality is not implemented yet.");
+    alert("Share functionality is not implemented yet.");
   };
 
   const handleBookmarkText = async (text) => {

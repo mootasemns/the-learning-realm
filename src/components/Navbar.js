@@ -103,7 +103,7 @@ function Navbar() {
                 <FontAwesomeIcon icon={faTimes} size="2x" />
               </div>
             )}
-            <div className="nav-button">
+            {/* <div className="nav-button">
               <button
                 className="btn"
                 id="liBtn"
@@ -118,7 +118,7 @@ function Navbar() {
               >
                 Dark
               </button>
-            </div>
+            </div> */}
           </nav>
           <div className="menu-btn" onClick={toggleResponsiveMenu}>
             <FontAwesomeIcon icon={faBars} size="2x" />

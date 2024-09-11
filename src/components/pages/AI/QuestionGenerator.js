@@ -9,16 +9,17 @@ function QuestionsGenerator() {
 
   const [inputText, setInputText] = useState("");
   const [messages, setMessages] = useState([]);
-  const [fullQuestions, setFullQuestions] = useState([]); // State to store full question-answer pairs
+  const [fullQuestions, setFullQuestions] = useState([]);
 
   const handleSendMessage = async () => {
+    setInputText("");
     if (inputText.trim() !== "") {
       const newMessages = [...messages, { text: inputText, type: "user-text" }];
       setMessages(newMessages);
 
       try {
         const response = await fetch(
-          "https://5bf2-109-107-226-136.ngrok-free.app/generate_questions/",
+          "https://e7d2-109-107-224-76.ngrok-free.app/generate_questions/",
           {
             method: "POST",
             headers: {
@@ -48,7 +49,7 @@ function QuestionsGenerator() {
           setMessages([
             ...newMessages,
             {
-              text: "AI: Sorry, there was an error processing your request.",
+              text: "Sorry, there was an error processing your request.",
               type: "ai-text",
             },
           ]);
@@ -58,13 +59,11 @@ function QuestionsGenerator() {
         setMessages([
           ...newMessages,
           {
-            text: "AI: Sorry, there was an error fetching the data.",
+            text: "Sorry, there was an error fetching the data.",
             type: "ai-text",
           },
         ]);
       }
-
-      setInputText("");
     }
   };
 
